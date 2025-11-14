@@ -24,12 +24,111 @@
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated gradient background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(147, 51, 234, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+            animation: gradientShift 15s ease infinite;
+            z-index: 0;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1);
+            }
+        }
+
+        /* Floating glow orbs */
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glow-orb-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, transparent 70%);
+            top: 10%;
+            left: 10%;
+            animation: float1 20s ease-in-out infinite;
+        }
+
+        .glow-orb-2 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.6) 0%, transparent 70%);
+            top: 60%;
+            right: 15%;
+            animation: float2 25s ease-in-out infinite;
+        }
+
+        .glow-orb-3 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.5) 0%, transparent 70%);
+            bottom: 20%;
+            left: 50%;
+            animation: float3 18s ease-in-out infinite;
+        }
+
+        @keyframes float1 {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(50px, -80px) scale(1.1);
+            }
+            66% {
+                transform: translate(-30px, 60px) scale(0.9);
+            }
+        }
+
+        @keyframes float2 {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(-60px, 50px) scale(0.95);
+            }
+            66% {
+                transform: translate(40px, -70px) scale(1.05);
+            }
+        }
+
+        @keyframes float3 {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(80px, -40px) scale(1.15);
+            }
         }
 
         .container {
             text-align: center;
             padding: 2rem;
             max-width: 100%;
+            position: relative;
+            z-index: 1;
         }
 
         .logo {
@@ -37,6 +136,7 @@
             height: auto;
             margin-bottom: 3rem;
             animation: fadeIn 1s ease-in;
+            position: relative;
         }
 
         .logo img {
@@ -44,14 +144,29 @@
             height: auto;
             display: block;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 0 30px rgba(59, 130, 246, 0.3));
+            animation: fadeIn 1s ease-in, logoGlow 3s ease-in-out infinite 1s;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 30px rgba(59, 130, 246, 0.3));
+            }
+            50% {
+                filter: drop-shadow(0 0 40px rgba(147, 51, 234, 0.4));
+            }
         }
 
         .message {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 300;
             letter-spacing: 0.05em;
             opacity: 0.9;
+            position: relative;
+            color: #ffffff;
             animation: fadeIn 1s ease-in 0.3s both;
         }
 
@@ -72,24 +187,27 @@
             }
 
             .message {
-                font-size: 1.2rem;
+                font-size: 1rem;
             }
         }
 
         @media (max-width: 480px) {
             .message {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+    <div class="glow-orb glow-orb-3"></div>
     <div class="container">
         <div class="logo">
             <img src="fluxary_dark.svg" alt="Fluxary Logo">
         </div>
         <div class="message">
-            Coming Soon
+            Our agents are cooking something special
         </div>
     </div>
 </body>
