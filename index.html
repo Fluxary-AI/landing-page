@@ -168,6 +168,27 @@
             position: relative;
             color: #ffffff;
             animation: fadeIn 1s ease-in 0.3s both;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .message.typing::after {
+            content: '|';
+            display: inline-block;
+            position: relative;
+            top: 0;
+            left: 0;
+            font-weight: 700;
+            transform: scaleX(1.6);
+            transform-origin: left center;
+            margin-left: 0.15em;
+            opacity: 0.9;
+            animation: caretBlink 900ms steps(1) infinite;
+        }
+
+        @keyframes caretBlink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
         }
 
         @keyframes fadeIn {
@@ -178,6 +199,19 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            body::before,
+            .glow-orb,
+            .logo img,
+            .message {
+                animation: none !important;
+            }
+
+            .message.typing::after {
+                content: '';
             }
         }
 
@@ -206,10 +240,69 @@
         <div class="logo">
             <img src="fluxary_dark.svg" alt="Fluxary Logo">
         </div>
-        <div class="message">
-            Our agents are cooking something special
+        <div class="message typing" id="hero-message" data-text="Automate Everything">
+            Automate Everything
         </div>
     </div>
+
+    <script>
+        (() => {
+            const el = document.getElementById('hero-message');
+            if (!el) return;
+
+            const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const fullText = (el.getAttribute('data-text') || el.textContent || '').trim();
+            if (!fullText) return;
+
+            if (prefersReducedMotion) {
+                el.textContent = fullText;
+                el.classList.remove('typing');
+                return;
+            }
+
+            const logoImg = document.querySelector('.logo img');
+
+            const waitForLogoReady = () =>
+                new Promise((resolve) => {
+                    if (!logoImg) return resolve();
+
+                    const afterLoad = () => {
+                        // Wait for the non-infinite "fadeIn" animation to finish
+                        const onAnimEnd = (e) => {
+                            if (e.animationName === 'fadeIn') {
+                                logoImg.removeEventListener('animationend', onAnimEnd);
+                                resolve();
+                            }
+                        };
+
+                        logoImg.addEventListener('animationend', onAnimEnd, { once: false });
+
+                        // Fallback: if the event doesn't fire for any reason
+                        window.setTimeout(resolve, 1200);
+                    };
+
+                    if (logoImg.complete) afterLoad();
+                    else logoImg.addEventListener('load', afterLoad, { once: true });
+                });
+
+            const len = fullText.length;
+            let step = 0;
+            el.textContent = '';
+
+            const tick = () => {
+                step = Math.min(len, step + 1);
+                el.textContent = fullText.slice(0, step);
+
+                if (step >= len) {
+                    el.classList.remove('typing');
+                    return;
+                }
+                window.setTimeout(tick, 100);
+            };
+
+            waitForLogoReady().then(() => window.setTimeout(tick, 150));
+        })();
+    </script>
 </body>
 </html>
 
