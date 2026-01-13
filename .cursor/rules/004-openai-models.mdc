@@ -1,0 +1,48 @@
+---
+alwaysApply: true
+---
+
+# OpenAI Models
+
+## Available models and default preferences
+
+When using OpenAI API, the following models are available:
+
+### Frontier Models (recommended for most tasks)
+
+| Model ID | Name | Description |
+|----------|------|-------------|
+| `gpt-5.1` | GPT-5.1 | The best model for coding and agentic tasks with configurable reasoning effort |
+| `gpt-5-mini` | GPT-5 mini | A faster, cost-efficient version of GPT-5 for well-defined tasks |
+| `gpt-5-nano` | GPT-5 nano | Fastest, most cost-efficient version of GPT-5 |
+| `gpt-5-pro` | GPT-5 pro | Version of GPT-5 that produces smarter and more precise responses |
+| `gpt-5` | GPT-5 | Previous intelligent reasoning model for coding and agentic tasks |
+| `gpt-4.1` | GPT-4.1 | Smartest non-reasoning model |
+
+### Default Model Selection
+
+**Always use these defaults unless specified otherwise:**
+
+- **Default for most tasks:** `gpt-5-mini` - Good balance of speed, cost, and capability
+- **Default for simple/fast tasks:** `gpt-5-nano` - When speed and cost matter most
+- **For complex reasoning:** `gpt-5.1` or `gpt-5-pro` - Only when explicitly needed
+
+### Code Example
+
+```python
+# Default model constant
+MODEL_NAME = "gpt-5-mini"  # Use this as default
+
+# For simpler extraction tasks
+FAST_MODEL = "gpt-5-nano"
+
+# For complex reasoning (use sparingly)
+REASONING_MODEL = "gpt-5.1"
+```
+
+
+
+
+
+
+

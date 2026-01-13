@@ -1,0 +1,28 @@
+---
+alwaysApply: true
+---
+
+# Raising a Pull Request
+
+## PR Template
+
+Always use the following template when creating pull requests:
+
+```markdown
+## Summary
+
+[A couple of sentences describing the main changes in this PR]
+
+## Main Changes
+
+[Link the most non-trivial changes to the PR and give a short explanation for each]
+
+- [Link to file/change] - [Brief explanation]
+- [Link to file/change] - [Brief explanation]
+```
+
+## Using GitHub MCP
+
+**Always use GitHub MCP to create pull requests.**
+
+If the GitHub MCP is not available, it is likely because Docker is not running on the machine. Prompt the user to restart Docker Desktop if the GitHub MCP is not available.

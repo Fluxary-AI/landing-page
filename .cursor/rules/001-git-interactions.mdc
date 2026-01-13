@@ -1,0 +1,42 @@
+---
+alwaysApply: true
+---
+
+# Git Interactions
+
+## Commit Messages
+
+Always use conventional commits format for every commit:
+
+- `feat: description` - New features
+- `fix: description` - Bug fixes
+- `docs: description` - Documentation changes
+- `style: description` - Code style changes (formatting, etc.)
+- `refactor: description` - Code refactoring
+- `test: description` - Adding or updating tests
+- `chore: description` - Maintenance tasks
+
+Keep commit messages concise and clear. Do not make them verbose.
+
+## Branch Naming
+
+Follow these branch naming conventions:
+
+- `feat/some-feature` - Feature branches
+- `fix/some-fix` - Bug fix branches
+- `docs/some-docs` - Documentation branches
+- `refactor/some-refactor` - Refactoring branches
+- `test/some-test` - Test-related branches
+- `chore/some-chore` - Maintenance branches
+
+## Branch Protections
+
+**Never push directly to protected branches without explicit user approval:**
+
+- `main`
+- `dev`
+- `prod`
+- `deploy/*`
+
+These branches require pull requests and code review. Always create a feature branch and submit a PR instead of pushing directly.
+
