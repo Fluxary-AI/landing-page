@@ -1,0 +1,20 @@
+---
+alwaysApply: true
+---
+
+# Code Changes
+
+## Code Changes
+
+When making code changes:
+- DO NOT create markdown documentation files (*.md) unless explicitly requested by the user
+- DO NOT create summary files, changelog files, or progress reports automatically
+- Focus on implementing, testing, and fixing code
+- Only document in code comments and docstrings
+
+## Exceptions
+
+Create markdown files ONLY when:
+- User explicitly asks for documentation
+- Creating/updating README.md for a new project
+- Technical specs are specifically requested
